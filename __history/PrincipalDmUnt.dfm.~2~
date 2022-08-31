@@ -1,0 +1,14 @@
+object PrincipalDM: TPrincipalDM
+  OldCreateOrder = False
+  Height = 150
+  Width = 215
+  object conn: TFDConnection
+    Params.Strings = (
+      'Database=C:\dev\delphi\prjVendas\DB\VENDAS.FDB'
+      'DriverID=FB'
+      'Password=Tigre401!'
+      'User_Name=SYSDBA')
+    Left = 96
+    Top = 56
+  end
+end

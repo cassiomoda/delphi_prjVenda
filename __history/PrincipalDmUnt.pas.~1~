@@ -1,0 +1,25 @@
+unit PrincipalDmUnt;
+
+interface
+
+uses
+  System.SysUtils, System.Classes;
+
+type
+  TPrincipalDM = class(TDataModule)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PrincipalDM: TPrincipalDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

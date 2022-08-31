@@ -1,0 +1,30 @@
+unit selFormaPagamentoUnt;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.DBCtrls, DmUnt, Vcl.StdCtrls,
+  Vcl.Mask;
+
+type
+  TselFormaPagamentoFrm = class(TForm)
+    formaPagamentoCb: TDBLookupComboBox;
+    formaPagamentoLbl: TLabel;
+    MaskEdit1: TMaskEdit;
+    valorLbl: TLabel;
+    okBtn: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  selFormaPagamentoFrm: TselFormaPagamentoFrm;
+
+implementation
+
+{$R *.dfm}
+
+end.

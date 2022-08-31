@@ -1,0 +1,13 @@
+object VendaDM: TVendaDM
+  OldCreateOrder = False
+  Height = 216
+  Width = 269
+  object FDQuery1: TFDQuery
+    Left = 24
+    Top = 72
+  end
+  object vendaTR: TFDTransaction
+    Left = 24
+    Top = 16
+  end
+end

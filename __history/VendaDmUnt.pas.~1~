@@ -1,0 +1,25 @@
+unit VendaDmUnt;
+
+interface
+
+uses
+  System.SysUtils, System.Classes;
+
+type
+  TVendaDM = class(TDataModule)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  VendaDM: TVendaDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

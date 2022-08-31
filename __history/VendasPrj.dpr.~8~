@@ -1,0 +1,15 @@
+program VendasPrj;
+
+uses
+  Vcl.Forms,
+  PrincipalUnt in 'PrincipalUnt.pas' {PrincipalFrm},
+  DmUnt in 'DmUnt.pas' {DM: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TPrincipalFrm, PrincipalFrm);
+  Application.Run;
+end.

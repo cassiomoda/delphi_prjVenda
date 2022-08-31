@@ -1,0 +1,347 @@
+unit DmUnt;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
+  IniFiles, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet, Datasnap.DBClient;
+
+type
+  TDM = class(TDataModule)
+    conn: TFDConnection;
+    vendaTR: TFDTransaction;
+    listaVendasQry: TFDQuery;
+    listaVendasDS: TDataSource;
+    vendaQry: TFDQuery;
+    vendaDS: TDataSource;
+    itemVendaQry: TFDQuery;
+    itemVendaDS: TDataSource;
+    listaItemVendaQry: TFDQuery;
+    listaItemVendaSC: TDataSource;
+    descontoVendaQry: TFDQuery;
+    descontoVendaDS: TDataSource;
+    receitaVendaQry: TFDQuery;
+    receitaVendaDS: TDataSource;
+    auxiliarQry: TFDQuery;
+    listaProdutosQry: TFDQuery;
+    listaProdutosDS: TDataSource;
+    listaVendasQryCODIGO: TIntegerField;
+    listaVendasQryDATA: TSQLTimeStampField;
+    listaVendasQryVALOR_BRUTO: TCurrencyField;
+    listaVendasQryVALOR_DESCONTO: TCurrencyField;
+    listaVendasQryVALOR_LIQUIDO: TCurrencyField;
+    listaVendasQryCANCELADA: TStringField;
+    listaItemVendaQryCODIGO_SEQUENCIAL: TIntegerField;
+    listaItemVendaQryCODIGO_VENDA: TIntegerField;
+    listaItemVendaQryCODIGO_PRODUTO: TIntegerField;
+    listaItemVendaQryVALOR: TCurrencyField;
+    listaItemVendaQryQTDE: TIntegerField;
+    listaItemVendaQryVALOR_SUBTOTAL: TCurrencyField;
+    listaItemVendaQryDESCRICAO: TStringField;
+    listaProdutosQryCODIGO: TIntegerField;
+    listaProdutosQryDESCRICAO: TStringField;
+    listaProdutosQryCODIGO_GRUPO: TIntegerField;
+    listaProdutosQryVALOR: TCurrencyField;
+    listaProdutosQryGRUPO: TStringField;
+    vendaQryCODIGO: TIntegerField;
+    vendaQryDATA: TSQLTimeStampField;
+    vendaQryVALOR_BRUTO: TCurrencyField;
+    vendaQryVALOR_DESCONTO: TCurrencyField;
+    vendaQryVALOR_LIQUIDO: TCurrencyField;
+    vendaQryCANCELADA: TStringField;
+    itemVendaQryCODIGO_SEQUENCIAL: TIntegerField;
+    itemVendaQryCODIGO_VENDA: TIntegerField;
+    itemVendaQryCODIGO_PRODUTO: TIntegerField;
+    itemVendaQryVALOR: TCurrencyField;
+    itemVendaQryQTDE: TIntegerField;
+    itemVendaQryVALOR_SUBTOTAL: TCurrencyField;
+    descontoVendaQryCODIGO_SEQUENCIAL: TIntegerField;
+    descontoVendaQryCODIGO_VENDA: TIntegerField;
+    descontoVendaQryCODIGO_DESCONTO: TIntegerField;
+    descontoVendaQryDESCRICAO_DESCONTO: TStringField;
+    descontoVendaQryVALOR_PERCENTUAL: TCurrencyField;
+    receitaVendaQryCODIGO_SEQUENCIAL: TIntegerField;
+    receitaVendaQryCODIGO_VENDA: TIntegerField;
+    receitaVendaQryCODIGO_RECEITA: TIntegerField;
+    receitaVendaQryDESCRICAO_RECEITA: TStringField;
+    receitaVendaQryVALOR: TCurrencyField;
+    itemVendaQryDESCRICAO: TStringField;
+    descontosCds: TClientDataSet;
+    descontosCdsCodigo: TIntegerField;
+    descontosCdsDescricao: TStringField;
+    descontosCdsPercentual: TFloatField;
+    descontosDs: TDataSource;
+    receitasCds: TClientDataSet;
+    receitasCdsCodigo: TIntegerField;
+    receitasCdsDescricao: TStringField;
+    receitasDs: TDataSource;
+    listaVendasQryBtnExcluir: TStringField;
+    itemVendaQryBtnExcluir: TStringField;
+    descontoVendaQryBtnExcluir: TStringField;
+    procedure listaVendasDSDataChange(Sender: TObject; Field: TField);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function Conectar(): boolean;
+    function GerarCodVenda(): integer;
+    function GerarSeqItemVenda(): integer;
+    function GerarSeqDescontoVenda(): integer;
+    function GerarSeqReceitaVenda(): integer;
+    function ExcluirVenda(codigo: integer): boolean;
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+function TDM.Conectar(): Boolean;
+var
+  confs: TIniFile;
+begin
+  conn.Connected := false;
+
+  try
+    confs := TIniFile.Create(GetNamePath + '\confs.ini');
+
+    conn.Params.Database := confs.ReadString('PARAMS', 'database', 'c:\dev\delphi\prjVendas\db\vendas.fdb');
+    conn.Params.UserName := confs.ReadString('PARAMS', 'userName', 'SYSDBA');
+    conn.Params.Password := confs.ReadString('PARAMS', 'password', 'Tigre401!');
+
+    conn.Connected := true;
+
+    result := conn.Connected;
+
+    descontosCds.CreateDataSet;
+    descontosCds.Open;
+
+    descontosCds.Insert;
+    descontosCdsCodigo.Value := 1;
+    descontosCdsDescricao.Value := 'Desconto de 10%';
+    descontosCdsPercentual.Value := 10.0;
+    descontosCds.Post;
+
+    descontosCds.Insert;
+    descontosCdsCodigo.Value := 2;
+    descontosCdsDescricao.Value := 'Desconto de Funcionario';
+    descontosCdsPercentual.Value := 50.0;
+    descontosCds.Post;
+
+    descontosCds.Insert;
+    descontosCdsCodigo.Value := 3;
+    descontosCdsDescricao.Value := 'Desconto de Cortesia';
+    descontosCdsPercentual.Value := 90.0;
+    descontosCds.Post;
+
+    receitasCds.CreateDataSet;
+    receitasCds.Open;
+
+    receitasCds.Insert;
+    receitasCdsCodigo.Value := 1;
+    receitasCdsDescricao.Value := 'Dinheiro';
+    receitasCds.Post;
+
+    receitasCds.Insert;
+    receitasCdsCodigo.Value := 2;
+    receitasCdsDescricao.Value := 'Cartão Crédito';
+    receitasCds.Post;
+
+    receitasCds.Insert;
+    receitasCdsCodigo.Value := 3;
+    receitasCdsDescricao.Value := 'Cartão Débito';
+    receitasCds.Post;
+  except
+    result := false;
+  end;
+end;
+
+function TDM.GerarCodVenda(): Integer;
+begin
+  try
+    auxiliarQry.Close;
+    auxiliarQry.sql.Clear;
+    auxiliarQry.sql.Text := ' select max(CODIGO) as ultimo from VENDA ';
+    auxiliarQry.Open;
+
+    if auxiliarQry.FieldByName('ultimo').AsInteger > 0 then
+      result := auxiliarQry.FieldByName('ultimo').AsInteger + 1
+    else
+      result := 1;
+  finally
+    auxiliarQry.Close;
+  end;
+end;
+
+function TDM.GerarSeqItemVenda(): integer;
+var
+  ultimaSeq: integer;
+begin
+  try
+    try
+      if itemVendaQry.RecordCount = 0 then
+        result := 1
+      else
+      begin
+        ultimaSeq := 0;
+
+        itemVendaQry.DisableControls;
+        itemVendaQry.First;
+
+        while not itemVendaQry.Eof do
+        begin
+          if ultimaSeq < itemVendaQryCODIGO_SEQUENCIAL.AsInteger then
+            ultimaSeq := itemVendaQryCODIGO_SEQUENCIAL.AsInteger;
+
+          itemVendaQry.Next;
+        end;
+
+        result := ultimaSeq + 1;
+      end;
+    except
+      result := 0;
+    end;
+  finally
+    itemVendaQry.EnableControls;
+  end;
+end;
+
+function TDM.GerarSeqDescontoVenda(): integer;
+var
+  ultimaSeq: integer;
+begin
+  try
+    try
+      if descontoVendaQry.RecordCount = 0 then
+        result := 1
+      else
+      begin
+        ultimaSeq := 0;
+
+        descontoVendaQry.DisableControls;
+        itemVendaQry.First;
+
+        while not itemVendaQry.Eof do
+        begin
+          if ultimaSeq < descontoVendaQryCODIGO_SEQUENCIAL.AsInteger then
+            ultimaSeq := descontoVendaQryCODIGO_SEQUENCIAL.AsInteger;
+
+          descontoVendaQry.Next;
+        end;
+
+        result := ultimaSeq + 1;
+      end;
+    except
+      result := 0;
+    end;
+  finally
+    descontoVendaQry.EnableControls;
+  end;
+end;
+
+function TDM.GerarSeqReceitaVenda(): integer;
+var
+  ultimaSeq: integer;
+begin
+  try
+    try
+      if receitaVendaQry.RecordCount = 0 then
+        result := 1
+      else
+      begin
+        ultimaSeq := 0;
+
+        receitaVendaQry.DisableControls;
+        receitaVendaQry.First;
+
+        while not receitaVendaQry.Eof do
+        begin
+          if ultimaSeq < receitaVendaQryCODIGO_SEQUENCIAL.AsInteger then
+            ultimaSeq := receitaVendaQryCODIGO_SEQUENCIAL.AsInteger;
+
+          receitaVendaQry.Next;
+        end;
+
+        result := ultimaSeq + 1;
+      end;
+    except
+      result := 0;
+    end;
+  finally
+    receitaVendaQry.EnableControls;
+  end;
+end;
+
+function TDM.ExcluirVenda(codigo: integer): boolean;
+begin
+  try
+    result := false;
+
+    if codigo > 0 then
+    begin
+      vendaTR.StartTransaction;
+
+      receitaVendaQry.Close;
+      receitaVendaQry.ParamByName('codVenda').AsInteger := codigo;
+      receitaVendaQry.Open;
+      while not receitaVendaQry.Eof do
+      begin
+        receitaVendaQry.Delete;
+        receitaVendaQry.First;
+      end;
+      receitaVendaQry.ApplyUpdates(0);
+      receitaVendaQry.Close;
+
+      descontoVendaQry.Close;
+      descontoVendaQry.ParamByName('codVenda').AsInteger := codigo;
+      descontoVendaQry.Open;
+      while not descontoVendaQry.Eof do
+      begin
+        descontoVendaQry.Delete;
+        descontoVendaQry.First;
+      end;
+      descontoVendaQry.ApplyUpdates(0);
+      descontoVendaQry.Close;
+
+      itemVendaQry.Close;
+      itemVendaQry.ParamByName('codVenda').AsInteger := codigo;
+      itemVendaQry.Open;
+      while not itemVendaQry.Eof do
+      begin
+        itemVendaQry.Delete;
+        itemVendaQry.First;
+      end;
+      itemVendaQry.ApplyUpdates(0);
+      itemVendaQry.Close;
+
+      vendaQry.Close;
+      vendaQry.ParamByName('codVenda').AsInteger := codigo;
+      vendaQry.Open;
+      vendaQry.Delete;
+      vendaQry.ApplyUpdates(0);
+
+      vendaTR.Commit;
+      result := true;
+    end;
+  except
+    vendaTR.Rollback;
+    result := false;
+  end;
+end;
+
+procedure TDM.listaVendasDSDataChange(Sender: TObject; Field: TField);
+begin
+  listaItemVendaQry.Close;
+  listaItemVendaQry.ParamByName('codVenda').AsInteger := listaVendasQryCODIGO.Value;
+  listaItemVendaQry.Open;
+end;
+
+end.

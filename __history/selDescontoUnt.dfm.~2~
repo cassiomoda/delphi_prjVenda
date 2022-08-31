@@ -1,0 +1,45 @@
+object selDescontoFrm: TselDescontoFrm
+  Left = 0
+  Top = 0
+  Caption = 'selDescontoFrm'
+  ClientHeight = 231
+  ClientWidth = 505
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 296
+    Top = 136
+    Width = 320
+    Height = 120
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object tituloPnl: TPanel
+    Left = 0
+    Top = 0
+    Width = 505
+    Height = 41
+    Align = alTop
+    BevelOuter = bvNone
+    BorderWidth = 1
+    BorderStyle = bsSingle
+    Color = clBtnShadow
+    Ctl3D = False
+    ParentBackground = False
+    ParentCtl3D = False
+    TabOrder = 1
+    ExplicitLeft = -32
+    ExplicitWidth = 537
+  end
+end

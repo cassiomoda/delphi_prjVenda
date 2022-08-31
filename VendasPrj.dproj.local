@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/08/29 09:35:22.000.399,=C:\dev\delphi\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 09:37:47.000.700,=C:\dev\delphi\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 09:42:20.000.320,=C:\dev\delphi\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 09:44:04.000.428,C:\dev\delphi\prjVendas\PrincipalUnt.dfm=C:\dev\delphi\Unit1.dfm</Transaction>
+    <Transaction>2022/08/29 09:44:04.000.428,C:\dev\delphi\prjVendas\PrincipalUnt.pas=C:\dev\delphi\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 09:44:18.000.714,C:\dev\delphi\prjVendas\VendasPrj.dproj=C:\dev\delphi\Project1.dproj</Transaction>
+    <Transaction>2022/08/29 10:35:07.000.328,=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 10:35:51.000.055,C:\dev\delphi\prjVendas\Unit1.pas=C:\dev\delphi\prjVendas\PrincipalDmUnt.pas</Transaction>
+    <Transaction>2022/08/29 10:35:51.000.055,C:\dev\delphi\prjVendas\Unit1.dfm=C:\dev\delphi\prjVendas\PrincipalDmUnt.dfm</Transaction>
+    <Transaction>2022/08/29 11:07:03.000.639,=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 11:07:57.000.045,C:\dev\delphi\prjVendas\Unit1.pas=C:\dev\delphi\prjVendas\GrupoProduto\GrupoDmUnt.pas</Transaction>
+    <Transaction>2022/08/29 11:07:57.000.045,C:\dev\delphi\prjVendas\Unit1.dfm=C:\dev\delphi\prjVendas\GrupoProduto\GrupoDmUnt.dfm</Transaction>
+    <Transaction>2022/08/29 11:20:56.000.087,=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 11:21:34.000.335,C:\dev\delphi\prjVendas\Unit1.dfm=C:\dev\delphi\prjVendas\VendaDmUnt.dfm</Transaction>
+    <Transaction>2022/08/29 11:21:34.000.335,C:\dev\delphi\prjVendas\Unit1.pas=C:\dev\delphi\prjVendas\VendaDmUnt.pas</Transaction>
+    <Transaction>2022/08/29 11:22:00.000.854,C:\dev\delphi\prjVendas\GrupoProduto\GrupoDmUnt.pas=</Transaction>
+    <Transaction>2022/08/29 11:25:52.000.449,C:\dev\delphi\prjVendas\VendaDmUnt.pas=</Transaction>
+    <Transaction>2022/08/29 11:26:13.000.042,C:\dev\delphi\prjVendas\DmUnt.dfm=C:\dev\delphi\prjVendas\PrincipalDmUnt.dfm</Transaction>
+    <Transaction>2022/08/29 11:26:13.000.042,C:\dev\delphi\prjVendas\DmUnt.pas=C:\dev\delphi\prjVendas\PrincipalDmUnt.pas</Transaction>
+    <Transaction>2022/08/29 11:47:51.000.287,=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 11:48:22.000.770,C:\dev\delphi\prjVendas\VendaUnt.dfm=C:\dev\delphi\prjVendas\Unit1.dfm</Transaction>
+    <Transaction>2022/08/29 11:48:22.000.770,C:\dev\delphi\prjVendas\VendaUnt.pas=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 15:11:57.000.393,=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+    <Transaction>2022/08/29 15:12:38.000.171,C:\dev\delphi\prjVendas\selProdutoUnt.dfm=C:\dev\delphi\prjVendas\Unit1.dfm</Transaction>
+    <Transaction>2022/08/29 15:12:38.000.171,C:\dev\delphi\prjVendas\selProdutoUnt.pas=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+    <Transaction>2022/08/30 21:30:42.000.222,=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+    <Transaction>2022/08/30 21:31:16.000.388,C:\dev\delphi\prjVendas\Unit1.pas=C:\dev\delphi\prjVendas\selDescontoUnt.pas</Transaction>
+    <Transaction>2022/08/30 21:31:16.000.388,C:\dev\delphi\prjVendas\Unit1.dfm=C:\dev\delphi\prjVendas\selDescontoUnt.dfm</Transaction>
+    <Transaction>2022/08/31 08:03:05.000.997,=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+    <Transaction>2022/08/31 08:04:02.000.478,C:\dev\delphi\prjVendas\selFormaPagamentoUnt.dfm=C:\dev\delphi\prjVendas\Unit1.dfm</Transaction>
+    <Transaction>2022/08/31 08:04:02.000.478,C:\dev\delphi\prjVendas\selFormaPagamentoUnt.pas=C:\dev\delphi\prjVendas\Unit1.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>

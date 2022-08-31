@@ -1,0 +1,16 @@
+program VendasPrj;
+
+uses
+  Vcl.Forms,
+  PrincipalUnt in 'PrincipalUnt.pas' {PrincipalFrm},
+  PrincipalDmUnt in 'PrincipalDmUnt.pas' {PrincipalDM: TDataModule},
+  GrupoDmUnt in 'GrupoProduto\GrupoDmUnt.pas' {GrupoDM: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TPrincipalFrm, PrincipalFrm);
+  Application.Run;
+end.

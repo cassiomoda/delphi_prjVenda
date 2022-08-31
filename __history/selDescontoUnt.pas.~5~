@@ -1,0 +1,30 @@
+unit selDescontoUnt;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls, DmUnt;
+
+type
+  TselDescontoFrm = class(TForm)
+    descontosDbGrid: TDBGrid;
+    tituloPnl: TPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    codigo: integer;
+    descricao: string;
+    percentual: double;
+  end;
+
+var
+  selDescontoFrm: TselDescontoFrm;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,52 @@
+unit PrincipalDmUnt;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
+  IniFiles;
+
+type
+  TPrincipalDM = class(TDataModule)
+    conn: TFDConnection;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function Conectar(): boolean;
+  end;
+
+var
+  PrincipalDM: TPrincipalDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+function TPrincipalDM.Conectar(): Boolean;
+var
+  confs: TIniFile;
+begin
+  conn.Connected := false;
+
+  try
+    confs := TIniFile.Create(appPath + '\confs.ini');
+
+    conn.Params.Database := confs.ReadString('PARAMS', 'database', 'c:\dev\delphi\prjVendas\db\vendas.fdb');
+    conn.Params.UserName := confs.ReadString('PARAMS', 'userName', 'SYSDBA');
+    conn.Params.Password := confs.ReadString('PARAMS', 'password', 'masterkey');
+
+    conn.Connected := true;
+
+    result := conn.Connected;
+  except
+    result := false;
+  end;
+end;
+
+end.
